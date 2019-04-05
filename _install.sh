@@ -4,7 +4,7 @@ echo "\e[94mUpdate Packaging Tool\e[0m"
 sudo apt update
 
 echo "\e[94mInstall Packages\e[0m"
-sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common python3-venv python-setuptools
+sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 
 echo "\e[94mInstall Docker\e[0m"
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
