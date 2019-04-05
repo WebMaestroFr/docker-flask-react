@@ -3,7 +3,7 @@ services:
   flask:
     build:
       context:     .
-      dockerfile:  Dockerfile.flask
+      dockerfile:  Dockerfile-flask
     environment:
       - FLASK_ENV=development
     ports:
@@ -13,7 +13,7 @@ services:
   react:
     build:
       context:     .
-      dockerfile:  Dockerfile.yarn
+      dockerfile:  Dockerfile-yarn
     ports:
       - 3000:3000
       - 35729:35729
