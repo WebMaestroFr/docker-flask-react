@@ -1,22 +1,22 @@
-version:         '3'
+version:         '3.7'
 services:
-  flask:
+  app:
     build:
-      context:     .
-      dockerfile:  Dockerfile-flask
+      context:   .
+      target:    flask
     environment:
       - FLASK_ENV=development
     ports:
       - 5000:5000
     volumes:
-      - ./app:/app
-  react:
+      - ./app:/root/app
+  client:
     build:
-      context:     .
-      dockerfile:  Dockerfile-yarn
+      context:   .
+      target:    yarn
     ports:
       - 3000:3000
       - 35729:35729
     volumes:
-      - ./public:/public
-      - ./src:/src
+      - ./public:/root/public
+      - ./src:/root/src
