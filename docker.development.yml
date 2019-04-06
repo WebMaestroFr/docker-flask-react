@@ -1,6 +1,7 @@
 version:         '3.7'
 services:
   app:
+    image: app:development
     build:
       context:   .
       target:    flask
@@ -11,9 +12,10 @@ services:
     volumes:
       - ./app:/root/app
   client:
+    image: client:development
     build:
       context:   .
-      target:    yarn
+      target:    yarn-development
     ports:
       - 3000:3000
       - 35729:35729

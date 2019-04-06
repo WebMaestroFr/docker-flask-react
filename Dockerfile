@@ -7,17 +7,24 @@ COPY src src
 COPY package.json yarn.* .
 
 RUN yarn install
-RUN yarn build
+
+
+FROM yarn AS yarn-development
 
 ENTRYPOINT [ "yarn" ]
 CMD [ "start" ]
+
+
+FROM yarn AS yarn-production
+
+RUN yarn build
 
 
 FROM python:3-alpine AS flask
 
 WORKDIR /root
 
-COPY --from=yarn /root/build build
+COPY --from=yarn-production /root/build build
 
 COPY app app
 COPY requirements.txt requirements.txt
