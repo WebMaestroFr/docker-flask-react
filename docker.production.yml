@@ -1,0 +1,9 @@
+version:         '3.7'
+services:
+  app:
+    image: app:production
+    build:
+      context:   .
+      target:    flask
+    ports:
+      - 80:5000

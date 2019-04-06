@@ -1,0 +1,24 @@
+version:         '3.7'
+services:
+  app:
+    image: app:development
+    build:
+      context:   .
+      target:    flask
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - 5000:5000
+    volumes:
+      - ./app:/root/app
+  client:
+    image: client:development
+    build:
+      context:   .
+      target:    yarn-development
+    ports:
+      - 3000:3000
+      - 35729:35729
+    volumes:
+      - ./public:/root/public
+      - ./src:/root/src
