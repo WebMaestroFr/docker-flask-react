@@ -17,8 +17,9 @@ FROM python:3-alpine AS flask
 
 WORKDIR /root
 
+COPY --from=yarn /root/build build
+
 COPY app app
-COPY --from=yarn /root/build client
 COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
