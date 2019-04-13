@@ -4,7 +4,7 @@ WORKDIR /root
 
 COPY public public
 COPY src src
-COPY package.json yarn.* .
+COPY package.json yarn.* ./
 
 RUN yarn install
 
