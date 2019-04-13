@@ -1,15 +1,14 @@
 import os
 from flask import Flask
 
-from .auth import auth
-from .auth.extensions import (db as auth_db, jwt as auth_jwt)
+from .auth import init_blueprint as init_auth
 
 
 class Config(object):
     APP_NAME = 'DockerFlask'
+    SECRET_KEY = 'some-secret-string'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'some-secret-string'
     JWT_SECRET_KEY = 'jwt-secret-string'
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
@@ -34,17 +33,7 @@ def create_app(config=None):
     except OSError:
         pass
 
-    auth_db.init_app(app)
-    auth_jwt.init_app(app)
-
-    app.register_blueprint(
-        auth,
-        url_prefix='/auth'
-    )
-
-    @app.before_first_request
-    def create_tables():
-        auth_db.create_all()
+    init_auth(app, url_prefix='/auth')
 
     @app.route('/')
     def index():
