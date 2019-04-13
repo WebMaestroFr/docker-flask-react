@@ -5,8 +5,8 @@ from flask_restful import Api
 from . import models, resources
 
 
-auth = Blueprint('auth', __name__)
-api = Api(auth)
+blueprint = Blueprint('auth', __name__)
+api = Api(blueprint)
 jwt = JWTManager()
 
 
@@ -15,7 +15,7 @@ def init_blueprint(app, **kwargs):
     models.db.init_app(app)
     jwt.init_app(app)
 
-    app.register_blueprint(auth, **kwargs)
+    app.register_blueprint(blueprint, **kwargs)
 
     @app.before_first_request
     def create_tables():
